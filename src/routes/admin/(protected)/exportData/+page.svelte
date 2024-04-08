@@ -11,8 +11,6 @@
 	} from 'firebase/firestore';
 	import { db } from '$lib/firebase';
 
-	export let data: PageData;
-
 	let exportDataError = '';
 	let isExporting = false;
 	let startDate = '';

@@ -50,6 +50,10 @@
 			isUpdating = false;
 		}
 	}
+
+	const timeStampString = data.timestamp
+		? new Date(data.timestamp.seconds).toLocaleString()
+		: '';
 </script>
 
 <div class="container min-h-screen flex flex-col relative">
@@ -113,7 +117,7 @@
 		<div class="w-full flex flex-col gap-2">
 			<div class="text-slate-400">Time</div>
 			<div class="font-normal p-2 bg-gray-100">
-				{new Date(data.timestamp.seconds).toLocaleString()}
+				{timeStampString}
 			</div>
 		</div>
 		<div class="w-full text-sm">
