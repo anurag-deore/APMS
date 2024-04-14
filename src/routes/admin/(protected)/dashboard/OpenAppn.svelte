@@ -13,13 +13,13 @@
 		<div
 			class="text-center grow h-full flex flex-col justify-center items-center gap-8"
 		>
-			<div class="w-1/2">
+			<div class="w-1/2 max-w-[400px]">
 				<Alldone />
 			</div>
-			<h2 class="text-secondary">All done! <br />No Open Appointments</h2>
+			<h2 class="text-gray-500">All done! <br />No Open Appointments</h2>
 		</div>
 	{:else}
-		<div class="flex flex-col items-center gap-3">
+		<div class="flex flex-col md:flex-row md:flex-wrap items-center gap-3">
 			{#each completedAppns as appt}
 				<ApptCard {appt} />
 			{/each}

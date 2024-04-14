@@ -1,7 +1,6 @@
 <script lang="ts">
 	import ExportIcon from '$lib/assets/ExportIcon.svelte';
 	import Button from '$lib/components/Button.svelte';
-	import type { PageData } from './$types';
 	import {
 		collection,
 		query,
@@ -71,15 +70,18 @@
 	}
 </script>
 
-<div class="flex flex-col">
+<div class="flex flex-col justify-center items-center">
 	<h2 class="text-lg font-semibold py-5 px-5">Export Data</h2>
-	<div class="flex flex-col gap-5 bg-white p-5">
+	<div class="flex flex-col w-full md:w-1/2 gap-5 bg-white p-5">
 		{#if exportDataError}
 			<div class="text-red-500 bg-red-100 px-5 py-3 rounded-md">
 				{exportDataError}
 			</div>
 		{/if}
-		<h3 class="text-lg text-gray-400">Select Date Range to export</h3>
+		<h3 class="text-lg text-gray-600">Select Date Range to export</h3>
+		<small class="text-secondary"
+			>Export all appointments in for a date range in CSV format</small
+		>
 		<form class="flex flex-col gap-4 bg-white">
 			<label class="form-control w-full max-w-full">
 				<div class="label">

@@ -157,7 +157,7 @@
 	}
 </script>
 
-<div class=" flex flex-col grow gap-5">
+<div class=" flex flex-col grow gap-5 h-full overflow-hidden pb-10">
 	<!-- <h2 class="text-lg font-semibold px-5 pt-5">Change password</h2>
 	{#if firebasePasswordError}
 		<div class="bg-red-100 text-red-500 p-3 mx-5 rounded-lg">
@@ -224,30 +224,30 @@
 	<hr class="w-full" /> -->
 
 	<h2 class="text-lg font-semibold pt-5 px-5">Edit Comment Templates</h2>
-	<div class="flex flex-col gap-3 px-5">
-		{#each comments as template, i}
-			<div class="flex items-center gap-1">
-				<div
-					class="bg-white border grow rounded-xl flex items-center px-4 h-full"
-				>
-					{template}
+	<div class="overflow-hidden flex flex-col gap-3">
+		<div class="overflow-y-auto flex flex-col gap-3 px-5">
+			{#each [...comments, ...comments] as template, i}
+				<div class="flex items-stretch gap-2">
+					<div class="bg-white border grow rounded-xl flex items-center px-4">
+						{template}
+					</div>
+					<IconButton
+						className={'p-3 bg-white'}
+						icon={EditIcon}
+						disabled={isSaving}
+						onClick={() => editComment(i)}
+					/>
+					<IconButton
+						disabled={isSaving}
+						className={'p-3 bg-white text-red-600'}
+						icon={DeleteIcon}
+						onClick={() => onDeleteClick(i)}
+					/>
 				</div>
-				<IconButton
-					className={'p-3 bg-white'}
-					icon={EditIcon}
-					disabled={isSaving}
-					onClick={() => editComment(i)}
-				/>
-				<IconButton
-					disabled={isSaving}
-					className={'p-3 bg-white text-red-600'}
-					icon={DeleteIcon}
-					onClick={() => onDeleteClick(i)}
-				/>
-			</div>
-		{/each}
+			{/each}
+		</div>
 		<hr class="w-full" />
-		<div class="flex items-start gap-1 w-full">
+		<div class="flex items-start gap-1 w-full px-5">
 			<label class="form-control w-full font-normal">
 				<input
 					type="text"

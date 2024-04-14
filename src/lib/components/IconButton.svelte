@@ -9,6 +9,7 @@
 <button
 	on:click={onClick}
 	{disabled}
+	{title}
 	class={`flex items-center w-fit rounded-xl border gap-4 ${className}`}
 >
 	<span class="w-5 h-5">

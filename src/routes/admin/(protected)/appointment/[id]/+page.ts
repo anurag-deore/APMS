@@ -1,13 +1,20 @@
 export const prerender = false;
 export const ssr = false;
 
-import { collection, getDocs, query, where } from 'firebase/firestore';
+import {
+	collection,
+	doc,
+	getDoc,
+	getDocs,
+	query,
+	where
+} from 'firebase/firestore';
 import { db } from '$lib/firebase';
 import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 import { get } from 'svelte/store';
 import type { AppointmentSchema } from '../../../../../app';
-import { appointments } from '$lib/dataStore';
+import { appointments, settingsStore } from '$lib/dataStore';
 
 export const load: PageLoad = async ({ params }) => {
 	const { id } = params;
@@ -30,12 +37,29 @@ export const load: PageLoad = async ({ params }) => {
 	// };
 
 	const appointmentStoreList = get(appointments);
-	if (appointmentStoreList) {
+	if (appointmentStoreList.length !== 0) {
 		const d = (get(appointments) as AppointmentSchema[]).find(
 			(doc) => doc.id === docId
 		);
 		if (d) {
 			return { data: d };
+		}
+	}
+
+	//check if commentlist is not null
+
+	const commentList = get(settingsStore).commentList;
+	if (commentList === null) {
+		const settingsDocRef = doc(db, 'configs', 'settings');
+		const settingsDoc = await getDoc(settingsDocRef);
+		if (settingsDoc.exists()) {
+			const settings = settingsDoc.data();
+			settingsStore.update((prev) => ({
+				...prev,
+				commentList: settings.commentList ?? []
+			}));
+		} else {
+			console.error('Settings document not found');
 		}
 	}
 

@@ -63,7 +63,7 @@
 		{/if}
 		<button
 			type="submit"
-			class="btn btn-active rounded-xl btn-primary text-white font-normal text-lg w-full mt-3"
+			class="btn btn-active rounded-xl btn-primary text-white font-normal text-lg w-full md:w-fit mt-3"
 		>
 			Check
 		</button>

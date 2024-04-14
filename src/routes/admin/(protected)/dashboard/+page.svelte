@@ -32,20 +32,20 @@
 <svelte:head>
 	<title>App Appointments</title>
 </svelte:head>
-<div class=" flex flex-col grow h-full">
+<div class=" flex flex-col flex-1 mb-3 overflow-hidden">
 	<h2 class="text-xl font-semibold px-3 py-3">Appointments</h2>
 
 	<div class="flex mb-3">
 		{#each items as item}
 			<button
 				on:click={handleClick(item.value)}
-				class={`flex-1 p-4 bg-white border-b-2 ${activeTabValue === item.value ? ' border-black' : 'border-white'}`}
+				class={`flex-1 p-4 bg-white hover:bg-gray-100 border-b-2 ${activeTabValue === item.value ? ' border-black' : 'border-white'}`}
 			>
 				{item.label}
 			</button>
 		{/each}
 	</div>
-	<div class="grow flex flex-col px-3 gap-3">
+	<div class="grow flex flex-col px-3 gap-3 overflow-y-auto">
 		{#each items as item}
 			{#if activeTabValue == item.value}
 				<svelte:component this={item.component} data={appointmentList} />

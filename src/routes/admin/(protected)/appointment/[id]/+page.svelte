@@ -4,9 +4,8 @@
 	import HomeIcon from '$lib/assets/HomeIcon.svelte';
 	import Button from '$lib/components/Button.svelte';
 	import { STATUS } from '$lib/constants';
-	import { doc, setDoc, updateDoc } from 'firebase/firestore';
+	import { Timestamp, doc, setDoc, updateDoc } from 'firebase/firestore';
 	import type { AppointmentSchema } from '../../../../../app';
-	import type { PageData } from './$types';
 	import { db } from '$lib/firebase';
 	import ChevronRight from '$lib/assets/ChevronRight.svelte';
 	import { get } from 'svelte/store';
@@ -16,6 +15,12 @@
 
 	let comment = data.comment ?? '';
 	let isUpdating: boolean = false;
+
+	const convertTimestampToDate = (timestamp: Timestamp | undefined) => {
+		if (!timestamp) return Date.now().toLocaleString;
+		// const date = new Date(timestamp.).toDateString();
+		return timestamp.toDate().toLocaleString();
+	};
 
 	const tagColors = {
 		[STATUS.APPROVED]: 'bg-green-100 text-green-600 border-green-300',
@@ -50,128 +55,128 @@
 			isUpdating = false;
 		}
 	}
-
-	const timeStampString = data.timestamp
-		? new Date(data.timestamp.seconds).toLocaleString()
-		: '';
 </script>
 
-<div class="container min-h-screen flex flex-col relative">
-	<div class="px-5 py-3 flex flex-col">
-		<div class="flex items-center gap-3 pb-3">
-			<a
-				href="/admin/dashboard"
-				class="flex rotate-180 w-7 h-7 bg-white p-1 border border-gray-400 rounded-md"
-			>
-				<ChevronRight />
-			</a>
-			<h2 class="font-semibold text-xl">Appointment Details</h2>
-		</div>
-		<div class="flex w-full justify-between items-center">
-			<div class="text-sm grow text-slate-500">21 March 2024, 12:34 PM</div>
-			<div
-				class={`px-2 py-1 whitespace-pre ${tagColors[data.status]} rounded text-xs`}
-			>
-				{data.status}
+<div
+	class="h-full overflow-y-auto pb-20 flex flex-col w-full relative items-center"
+>
+	<div class="w-full md:w-1/2 h-full">
+		<div class="px-5 py-3 flex flex-col">
+			<div class="flex items-center gap-3 pb-3">
+				<a
+					href="/admin/dashboard"
+					class="flex rotate-180 w-7 h-7 bg-white p-1 border border-gray-400 rounded-md"
+				>
+					<ChevronRight />
+				</a>
+				<h2 class="font-semibold text-xl">Appointment Details</h2>
 			</div>
-		</div>
-	</div>
-	<div class="flex flex-col gap-4 p-5 text-sm bg-white">
-		<div class="w-full flex flex-col gap-2">
-			<div class="text-slate-400">Name</div>
-			<div class="font-normal p-2 bg-gray-100">{data.name}</div>
-		</div>
-		<div class="w-full flex flex-col gap-2">
-			<div class="text-slate-400">Address</div>
-			<div class="font-normal p-2 bg-gray-100">
-				{data.address}
-			</div>
-		</div>
-		<div class="flex gap-3 w-full">
-			<div class="flex-1 flex flex-col gap-2">
-				<div class="text-slate-400">Token</div>
-				<div class="font-normal p-2 bg-gray-100">
-					{data.token}
-				</div>
-			</div>
-			<div class="flex-1 flex flex-col gap-2">
-				<div class="text-slate-400">Phone</div>
-				<div class="font-normal p-2 bg-gray-100">
-					{data.phone}
+			<div class="flex w-full justify-between items-center">
+				<div class="text-sm grow text-slate-500">21 March 2024, 12:34 PM</div>
+				<div
+					class={`px-2 py-1 whitespace-pre ${tagColors[data.status]} rounded text-xs`}
+				>
+					{data.status}
 				</div>
 			</div>
 		</div>
-		<div class="w-full flex flex-col gap-2">
-			<div class="text-slate-400">Email</div>
-			<div class="font-normal p-2 bg-gray-100 whitespace-pre overflow-x-auto">
-				{data.email}
+		<div class="flex flex-col gap-4 p-5 text-sm bg-white">
+			<div class="w-full flex flex-col gap-2">
+				<div class="text-slate-400">Name</div>
+				<div class="font-normal p-2 bg-gray-100">{data.name}</div>
 			</div>
-		</div>
-		<div class="w-full flex flex-col gap-2">
-			<div class="text-slate-400">Purpose</div>
-			<div class="font-normal p-2 bg-gray-100">
-				{data.purpose}
+			<div class="w-full flex flex-col gap-2">
+				<div class="text-slate-400">Address</div>
+				<div class="font-normal p-2 bg-gray-100">
+					{data.address}
+				</div>
 			</div>
-		</div>
+			<div class="flex gap-3 w-full">
+				<div class="flex-1 flex flex-col gap-2">
+					<div class="text-slate-400">Token</div>
+					<div class="font-normal p-2 bg-gray-100">
+						{data.token}
+					</div>
+				</div>
+				<div class="flex-1 flex flex-col gap-2">
+					<div class="text-slate-400">Phone</div>
+					<div class="font-normal p-2 bg-gray-100">
+						{data.phone}
+					</div>
+				</div>
+			</div>
+			<div class="w-full flex flex-col gap-2">
+				<div class="text-slate-400">Email</div>
+				<div class="font-normal p-2 bg-gray-100 whitespace-pre overflow-x-auto">
+					{data.email}
+				</div>
+			</div>
+			<div class="w-full flex flex-col gap-2">
+				<div class="text-slate-400">Purpose</div>
+				<div class="font-normal p-2 bg-gray-100">
+					{data.purpose}
+				</div>
+			</div>
 
-		<div class="w-full flex flex-col gap-2">
-			<div class="text-slate-400">Time</div>
-			<div class="font-normal p-2 bg-gray-100">
-				{timeStampString}
+			<div class="w-full flex flex-col gap-2">
+				<div class="text-slate-400">Time</div>
+				<div class="font-normal p-2 bg-gray-100">
+					{convertTimestampToDate(data.timestamp)}
+				</div>
 			</div>
-		</div>
-		<div class="w-full text-sm">
-			<div class="text-slate-400 pb-2">Comment (optional)</div>
-			<textarea
-				bind:value={comment}
-				on:change={handleCommentChange}
-				name="comment"
-				id="comment"
-				class="w-full textarea textarea-bordered rounded-md"
-			></textarea>
-			<div class="py-2 text-sm text-slate-600 font-medium text-center">
-				OR select from below
-			</div>
-			<div class="flex gap-2 w-full overflow-x-scroll pb-2">
-				{#each commentSuggestions as index, i}
-					<!-- <div
+			<div class="w-full text-sm">
+				<div class="text-slate-400 pb-2">Comment (optional)</div>
+				<textarea
+					bind:value={comment}
+					on:change={handleCommentChange}
+					name="comment"
+					id="comment"
+					class="w-full textarea textarea-bordered rounded-md"
+				></textarea>
+				<div class="py-2 text-sm text-slate-600 font-medium text-center">
+					OR select from below
+				</div>
+				<div class="flex gap-2 w-full overflow-x-scroll pb-2">
+					{#each commentSuggestions as index, i}
+						<!-- <div
 						class="py-2 px-4 rounded-full text-sm text-slate-600 border whitespace-nowrap bg-white border-gray-300"
 					>
 						Out of office.
 					</div> -->
-					<button
-						on:click={() => setCommentFromSuggestion(i)}
-						class="bg-slate-100 text-sm shrink-0 py-1 rounded-full px-3 border focus:border-black active:border-black"
-						>{index}</button
-					>
-				{/each}
+						<button
+							on:click={() => setCommentFromSuggestion(i)}
+							class="bg-slate-100 text-sm shrink-0 py-1 rounded-full px-3 border focus:border-black active:border-black"
+							>{index}</button
+						>
+					{/each}
+				</div>
 			</div>
-		</div>
-		<div class="flex flex-col gap-3 py-2 mb-10">
-			{#if data.status !== STATUS.APPROVED}
-				<Button
-					onclick={() => {
-						updateAndSetStatus('accept');
-					}}
-					isDisabled={isUpdating}
-					isLoading={isUpdating}
-					icon={CheckIcon}
-					type="accept"
-					title="Approve"
-				/>
-			{/if}
-			{#if data.status !== STATUS.REJECTED}
-				<Button
-					onclick={() => {
-						updateAndSetStatus('decline');
-					}}
-					isDisabled={isUpdating}
-					isLoading={isUpdating}
-					icon={CancelIcon}
-					type="decline"
-					title="Decline"
-				/>
-			{/if}
+			<div class="flex flex-col gap-3 py-2 mb-10">
+				{#if data.status !== STATUS.APPROVED}
+					<Button
+						onclick={() => {
+							updateAndSetStatus('accept');
+						}}
+						isDisabled={isUpdating}
+						isLoading={isUpdating}
+						icon={CheckIcon}
+						type="accept"
+						title="Approve"
+					/>
+				{/if}
+				{#if data.status !== STATUS.REJECTED}
+					<Button
+						onclick={() => {
+							updateAndSetStatus('decline');
+						}}
+						isDisabled={isUpdating}
+						isLoading={isUpdating}
+						icon={CancelIcon}
+						type="decline"
+						title="Decline"
+					/>
+				{/if}
+			</div>
 		</div>
 	</div>
 </div>

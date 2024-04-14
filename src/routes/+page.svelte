@@ -7,7 +7,7 @@
 >
 	<!-- class="container px-4 flex flex-col gap-8 items-center justify-center h-screen bg-gradient-to-b from-blue-400 to-blue-600" -->
 	<div
-		class="bg-white border shadow-lg rounded-xl h-[50vw] w-[50vw] flex items-center"
+		class="bg-white border shadow-lg rounded-xl md:h-[15vw] md:w-[15vw] h-[50vw] w-[50vw] flex items-center justify-center"
 	>
 		<img
 			src="https://images.collegedunia.com/public/college_data/images/logos/1585032003unnamed.png"

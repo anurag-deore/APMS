@@ -1,8 +1,9 @@
 <script lang="ts">
 	import Authenticated from '$lib/components/Authenticated.svelte';
-	import UnAuthenticated from '$lib/components/UnAuthenticated.svelte';
 </script>
 
 <Authenticated>
-	<slot />
+	<div class="h-screen flex items-center bg-white">
+		<slot />
+	</div>
 </Authenticated>

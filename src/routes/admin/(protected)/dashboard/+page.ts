@@ -14,34 +14,18 @@ export const load: PageLoad = async () => {
 	// firebase query to get all documents from appointments collection
 	const q = query(collection(db, 'appointments'));
 
-	let data;
-	const appointmentList = get(appointments);
-
-	const lastFetch = localStorage.getItem('lastFetch') ?? undefined;
-	const lastFetchTime = lastFetch ? new Date(parseInt(lastFetch)) : undefined;
-	const now = new Date();
-	const fiveMinutesAgo = new Date(now.getTime() - 5 * 60 * 1000);
-	if (
-		appointmentList.length === 0 ||
-		(lastFetchTime && lastFetchTime < fiveMinutesAgo)
-	) {
-		const querySnapshot = await getDocs(q);
-		if (querySnapshot.empty) {
-			error(404, 'Not found');
-		}
-		data = querySnapshot.docs.map((doc) => {
-			return {
-				...doc.data(),
-				id: doc.id
-			} as AppointmentSchema;
-		});
-		localStorage.setItem('lastFetch', `${now.getTime()}`);
-		appointments.set(data);
-	} else {
-		data = appointmentList.map((appointment: AppointmentSchema) => {
-			return { ...appointment };
-		});
+	const querySnapshot = await getDocs(q);
+	if (querySnapshot.empty) {
+		error(404, 'Not found');
 	}
+	const data = querySnapshot.docs.map((doc) => {
+		return {
+			...doc.data(),
+			id: doc.id
+		} as AppointmentSchema;
+	});
+	appointments.set(data);
+
 	//firebase query to get settings from the configs collections
 	const commentList = get(settingsStore).commentList;
 	if (commentList === null) {

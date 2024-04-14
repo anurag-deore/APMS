@@ -123,10 +123,20 @@
 	</a>
 </header>
 <div class="p-5">
-	<h3 class="text-3xl font-semibold py-3">Application Form</h3>
-	<form on:submit|preventDefault={handleSubmit}>
-		<fieldset disabled={isSubmitting} class="flex flex-col gap-2 items-center">
-			<legend class="text-secondary">Fill out the form for appointment</legend>
+	<h3 class="text-3xl text-left md:text-center font-semibold py-3">
+		Application Form
+	</h3>
+	<form
+		on:submit|preventDefault={handleSubmit}
+		class="flex flex-col items-center w-full justify-center"
+	>
+		<fieldset
+			disabled={isSubmitting}
+			class="flex flex-col md:w-[50%] w-full justify-center gap-2 items-center"
+		>
+			<legend class="text-secondary text-left md:text-center"
+				>Fill out the form for appointment</legend
+			>
 			<hr class="border-gray w-full" />
 			<label class="form-control w-full font-normal">
 				<div class="label justify-start gap-1">

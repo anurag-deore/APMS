@@ -5,10 +5,34 @@
 body {
 	background-color: rgb(250, 250, 250);
 	min-height: 100vh;
+	box-sizing: border-box;
 }
 
 .pattern {
 	background-image: linear-gradient(#f3f3f3 1px, transparent 1px),
 		linear-gradient(to right, #f3f3f3 1px, #ffffff 1px);
 	background-size: 70px 70px;
+}
+
+/* Hide scrollbar track */
+::-webkit-scrollbar {
+	height: 5px;
+	width: 10px; /* Width of the scrollbar */
+}
+
+/* Style the scrollbar thumb */
+::-webkit-scrollbar-thumb {
+	border-radius: 10px; /* Rounded corners of the thumb */
+	background-color: gray; /* Change color on hover */
+	width: 5px; /* Show scrollbar */
+}
+
+/* Increase width of scrollbar on hover */
+::-webkit-scrollbar:hover {
+	width: 10px; /* Show scrollbar on hover */
+}
+
+/* Increase thumb width on hover */
+::-webkit-scrollbar-thumb:hover {
+	width: 20px; /* Increase thumb width */
 }
