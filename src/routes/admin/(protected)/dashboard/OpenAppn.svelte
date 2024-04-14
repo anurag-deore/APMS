@@ -19,7 +19,10 @@
 			<h2 class="text-gray-500">All done! <br />No Open Appointments</h2>
 		</div>
 	{:else}
-		<div class="flex flex-col md:flex-row md:flex-wrap items-center gap-3">
+		<div
+			class={`flex flex-col lg:flex-row lg:items-stretch lg:justify-start items-center` +
+				`flex-nowrap lg:flex-wrap gap-3 pb-10 h-full !overflow-y-auto`}
+		>
 			{#each completedAppns as appt}
 				<ApptCard {appt} />
 			{/each}

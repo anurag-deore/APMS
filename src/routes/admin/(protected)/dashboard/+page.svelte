@@ -32,7 +32,7 @@
 <svelte:head>
 	<title>App Appointments</title>
 </svelte:head>
-<div class=" flex flex-col flex-1 mb-3 overflow-hidden">
+<div class="flex flex-col flex-1 mb-3 overflow-hidden">
 	<h2 class="text-xl font-semibold px-3 py-3">Appointments</h2>
 
 	<div class="flex mb-3">

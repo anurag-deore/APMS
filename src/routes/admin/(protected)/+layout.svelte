@@ -81,9 +81,9 @@
 				class="drawer-toggle"
 				bind:checked={drawerOpen}
 			/>
-			<div class="drawer-content flex flex-col h-screen">
+			<div class="drawer-content flex flex-col overflow-hidden h-screen">
 				<!-- Navbar -->
-				<nav class="flex w-full navbar border-b bg-white">
+				<nav class="flex w-full navbar border-b bg-">
 					<div class="flex-1 grow text-lg px-2 mx-2">ALSJ AMS</div>
 					<div class="flex-none hidden lg:block">
 						<ul class="menu menu-horizontal">
@@ -144,7 +144,7 @@
 							icon={ExportIcon}
 							title="Export Data"
 							className="!w-full !text-base"
-							onClick={() => navigateTo('/admin/exportData')}
+							onClick={() => navigateTo('/admin/export')}
 							disabled={false}
 						/>
 					</li>
