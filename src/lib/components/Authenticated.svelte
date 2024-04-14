@@ -3,6 +3,7 @@
 	import { authUser } from '$lib/authStore';
 	import { redirect } from '@sveltejs/kit';
 	import { onMount } from 'svelte';
+	import Loader from './Loader.svelte';
 
 	let isLoading = true;
 
@@ -20,7 +21,7 @@
 </script>
 
 {#if isLoading}
-	<p>Auth Loading...</p>
+	<Loader />
 {:else}
 	<slot />
 {/if}
