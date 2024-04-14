@@ -226,7 +226,7 @@
 	<h2 class="text-lg font-semibold pt-5 px-5">Edit Comment Templates</h2>
 	<div class="overflow-hidden flex flex-col gap-3">
 		<div class="overflow-y-auto flex flex-col gap-3 px-5">
-			{#each [...comments, ...comments] as template, i}
+			{#each comments as template, i}
 				<div class="flex items-stretch gap-2">
 					<div class="bg-white border grow rounded-xl flex items-center px-4">
 						{template}
