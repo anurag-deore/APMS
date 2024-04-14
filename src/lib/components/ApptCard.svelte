@@ -97,7 +97,7 @@
 
 <a
 	href="/admin/appointment/{appt.token}"
-	class={`w-full lg:w-[49%] bg-white relative rounded flex flex-col border border-slate-200 ${statusColor()}`}
+	class={`w-full lg:w-[49%] bg-white h-fit relative rounded flex flex-col border border-slate-200 ${statusColor()}`}
 >
 	<div class="flex flex-col gap-5 p-4 grow">
 		<div class="line-clamp-3 grow">{appt.purpose}</div>
